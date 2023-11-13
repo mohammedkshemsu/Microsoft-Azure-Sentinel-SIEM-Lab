@@ -140,7 +140,8 @@ Get Geolocation.io API Key:  <br/>
 </ul>
 
 
-<img src="https://i.imgur.com/v5dlpNp.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://imgur.com/TeflZrF.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
 <img src="https://i.imgur.com/XKzQFd6.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
@@ -155,7 +156,7 @@ Run PowerShell Script To Get Geo Data From Attackers:  <br/>
 geographical data using the Geolocation.io API.</li>
  <li>It creates a log file with attacker IP addresses and associated geographical data.</li>
 </ul>
-<img src="https://i.imgur.com/JMctSIN.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://imgur.com/y9QTspr.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 Create Custom Log In Log Analytics Workspace To Bring In The Custom Log:  <br/>
@@ -177,24 +178,26 @@ geographical data.</li>
 <br />
 Create Custom Fields/Extract Fields From Raw Custom Log Data:  <br/>
 <img src="https://i.imgur.com/s7UWvDZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/HzXJv5g.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/jMzIjF9.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/HvBn5oX.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/JkuEjfs.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/iUpDeT8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/rUFw2C8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/KEFaUHO.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/Q1kqHv6.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/1tXI6ot.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/ZvQP3f0.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/CyUSKKO.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/ummW9L7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/pztvfXB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/ZIrJnMJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/HtO5bEa.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/Bp6maXC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/FQByvsM.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/hqZIf0h.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+<br />
+<br />
+You can use this script to Extract Fields from Raw Custom Log Data:
+<br/>
+<br/>
+<b>FAILED_RDP_WITH_GEO_CL <br/>
+| extend username = extract(@"username:([^,]+)", 1, RawData),<br/>
+         timestamp = extract(@"timestamp:([^,]+)", 1, RawData),<br/>
+         latitude = extract(@"latitude:([^,]+)", 1, RawData),<br/>
+         longitude = extract(@"longitude:([^,]+)", 1, RawData),<br/>
+         sourcehost = extract(@"sourcehost:([^,]+)", 1, RawData),<br/>
+         state = extract(@"state:([^,]+)", 1, RawData),<br/>
+         label = extract(@"label:([^,]+)", 1, RawData),<br/>
+         destination = extract(@"destinationhost:([^,]+)", 1, RawData),<br/>
+         country = extract(@"country:([^,]+)", 1, RawData)<br/>
+| where destination != "samplehost"<br/>
+| where sourcehost != ""<br/>
+| summarize event_count=count() by latitude, longitude, sourcehost, label, destination, country</b><br/>
+<br />
 <br />
 <br />
 Setup Map In Sentinel With Latitude and Longitude:  <br/>
@@ -207,10 +210,8 @@ Setup Map In Sentinel With Latitude and Longitude:  <br/>
 longitude, label, or country).</li>
  
 </ul>
-<img src="https://i.imgur.com/ISIYPjT.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/AU62wEZ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/3ycJ1HH.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-<img src="https://i.imgur.com/rfVPBtw.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
+<img src="https://imgur.com/2gRUbyl.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 
 Monitor Map Data (Final Check): <br/>
 <ul>
@@ -218,7 +219,7 @@ Monitor Map Data (Final Check): <br/>
  <li>Notice any patterns or trends in the activity from different regions.</li>
  
 </ul>
-<img src="https://i.imgur.com/04jKmyv.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://imgur.com/vOLA1M7.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
 </p>
